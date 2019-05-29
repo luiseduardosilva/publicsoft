@@ -1,0 +1,44 @@
+<mat-toolbar color='primary' class='mat-elevation-z8' >
+  <span>PublicSoft</span>
+</mat-toolbar>
+<br>
+
+<div fxlayout='row wrap' fxLayoutAling='space-between' fxLayoutGap='20px'>
+<mat-card fxFlex='35'  class="mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Cliente</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <form class="">
+          <mat-form-field class="">
+            <input matInput placeholder="Nome" #nome>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="CNPJ" data-mask="00.000.000/0000-00" #cnpj>
+            </mat-form-field>
+            <button mat-mini-fab color="primary" (click)="addCliente(nome.value, cnpj.value)">  <mat-icon>add</mat-icon>  </button>
+        </form>        
+    <mat-list *ngIf='clientes$ | async as clie'>
+      <mat-list-item *ngFor='let c of clie'>
+          <mat-icon mat-list-icon>person</mat-icon>
+            <h4 mat-line>{{c.nome}}</h4>
+            <p mat-line>{{c.cnpj}}</p>
+            <button mat-icon-button color='warn' (click)="removerCliente(c)">
+              <mat-icon >delete</mat-icon>
+            </button>
+        </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="getClientes()">
+      <mat-icon>swap_vert</mat-icon> Carregar Clientes
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>	
+  </mat-card-footer>
+</mat-card>
+<div fxFlex='35'>
+  <app-etapa></app-etapa>
+</div>
+</div>
+
